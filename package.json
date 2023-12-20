@@ -1,24 +1,21 @@
 {
-  "publisher": "antfu",
-  "name": "ext-name",
-  "displayName": "ext-name",
-  "version": "0.0.0",
+  "publisher": "wingsheep",
+  "name": "jenkins-build",
+  "displayName": "Build Jenkins Job",
+  "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@8.10.5",
-  "description": "",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "description": "Fast and convenient way to build Jenkins jobs",
+  "author": "Wingsheep <1306750238@qq.com>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/ext-name#readme",
+  "funding": "https://github.com/sponsors/wingsheep",
+  "homepage": "https://github.com/wingsheep/vscode-jenkins#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/ext-name"
+    "url": "https://github.com/wingsheep/vscode-jenkins"
   },
   "bugs": {
-    "url": "https://github.com/antfu/ext-name/issues"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/antfu"
+    "url": "https://github.com/wingsheep/vscode-jenkins/issues"
   },
   "categories": [
     "Other"
@@ -34,6 +31,58 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Jenkins - Configuration",
+      "properties": {
+        "jenkins.domain": {
+          "type": "string",
+          "description": "Custom Jenkins domain",
+          "default": ""
+        },
+        "jenkins.userName": {
+          "type": "string",
+          "description": "UserName of the Jenkins",
+          "default": ""
+        },
+        "jenkins.passwordKey": {
+          "type": "string",
+          "description": "The key for the Jenkins password in system variables",
+          "default": "JENKINS_PASSWORD"
+        },
+        "jenkins.jobName": {
+          "type": "string",
+          "description": "JobName of the Jenkins",
+          "default": ""
+        },
+        "jenkins.params": {
+          "type": "object",
+          "description": "Params of the Jenkins",
+          "default": {}
+        },
+        "jenkins.isBuildCurrentBranch": {
+          "type": "boolean",
+          "description": "Whether to build the current branch",
+          "default": true
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "jenkins.buildJob",
+        "title": "Jenkins: Build job"
+      },
+      {
+        "command": "jenkins.killJob",
+        "title": "Jenkins: Stop build job"
+      },
+      {
+        "command": "jenkins.generateSetting",
+        "title": "Jenkins: Generate setting"
+      }
+    ]
+  },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
@@ -45,11 +94,21 @@
     "typecheck": "tsc --noEmit",
     "release": "bumpp && nr publish"
   },
+  "dependencies": {
+    "absolute": "^0.0.1",
+    "lodash": "^4.17.21",
+    "node-fetch": "^2",
+    "simple-git": "^3.21.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^1.1.1",
     "@antfu/ni": "^0.21.9",
+    "@types/absolute": "^0.0.31",
+    "@types/jenkins": "^1.0.2",
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20.9.0",
-    "@types/vscode": "^1.84.1",
+    "@types/node-fetch": "^2.6.9",
+    "@types/vscode": "^1.83.1",
     "@vscode/vsce": "^2.22.0",
     "bumpp": "^9.2.0",
     "eslint": "^8.53.0",
