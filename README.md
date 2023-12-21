@@ -8,7 +8,7 @@ Generate Jenkins configuration based on the current project and deploy with one 
 
 ## Install
 
-Follow the instructions in the [Marketplace](https://marketplace.visualstudio.com/items?itemName=wingsheep.easy-jenkins-build), or run the following in the command palette:
+Follow the instructions in the [Marketplace](https://marketplace.visualstudio.com/items?itemName=wingsheep.easy-build-jenkins&ssr=false#overview), or run the following in the command palette:
 
 ```shell
 ext install wingsheep.easy-jenkins-build
