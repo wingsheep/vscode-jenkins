@@ -1,8 +1,8 @@
 {
   "publisher": "wingsheep",
-  "name": "jenkins-build",
-  "displayName": "Build Jenkins Job",
-  "version": "0.0.1",
+  "name": "easy-build-jenkins",
+  "displayName": "Easy Build Jenkins Job",
+  "version": "0.0.2",
   "private": true,
   "packageManager": "pnpm@8.10.5",
   "description": "Fast and convenient way to build Jenkins jobs",
@@ -87,16 +87,18 @@
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
     "lint": "eslint .",
-    "vscode:prepublish": "nr build",
-    "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies",
+    "publish": "vsce publish",
+    "pack": "vsce package",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp && nr publish"
+    "release": "bumpp && nr publish",
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map"
   },
   "dependencies": {
     "absolute": "^0.0.1",
-    "lodash": "^4.17.21",
     "node-fetch": "^2",
     "simple-git": "^3.21.0"
   },
@@ -105,7 +107,6 @@
     "@antfu/ni": "^0.21.9",
     "@types/absolute": "^0.0.31",
     "@types/jenkins": "^1.0.2",
-    "@types/lodash": "^4.14.202",
     "@types/node": "^20.9.0",
     "@types/node-fetch": "^2.6.9",
     "@types/vscode": "^1.83.1",
@@ -115,9 +116,12 @@
     "esno": "^4.0.0",
     "pnpm": "^8.10.5",
     "rimraf": "^5.0.5",
+    "ts-loader": "^9.5.1",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   }
 }
