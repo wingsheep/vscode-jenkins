@@ -1,4 +1,4 @@
-# Open in GitHub
+# Easy Build Jenkins Job
 
 <p align="center">
   <img src="https://wingsheep.gallerycdn.vsassets.io/extensions/wingsheep/easy-build-jenkins/0.0.2/1703142794203/Microsoft.VisualStudio.Services.Icons.Default" width="128" alt="Logo">
@@ -37,11 +37,16 @@ ext install wingsheep.easy-jenkins-build
 
 ## Demo
 
-### OBuild jenkins job
-
-### Stop build job
-
 ### Generate setting
+
+https://github.com/wingsheep/vscode-jenkins/assets/26684771/58f15203-c701-42a5-9fb9-78e05b485f05
+
+
+### Build jenkins job && Stop build job
+
+https://github.com/wingsheep/vscode-jenkins/assets/26684771/995e7d57-c561-4a1a-9d87-6c075577c5a2
+
+
 
 
 ## License
