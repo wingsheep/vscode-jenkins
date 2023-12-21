@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import absolute from 'absolute'
 import type { SimpleGit } from 'simple-git'
 import { simpleGit } from 'simple-git'
@@ -22,12 +21,11 @@ const Utils = {
         return
 
       const firstRootPath = workspaceFolders[0].uri.fsPath
-
       if (!basePath || !absolute(basePath))
         return firstRootPath
 
       const rootPaths = workspaceFolders.map (folder => folder.uri.fsPath)
-      const sortedRootPaths = _.sortBy(rootPaths, [path => path.length]).reverse() // In order to get the closest root
+      const sortedRootPaths = rootPaths.sort((a, b) => b.length - a.length) // In order to get the closest root
 
       return sortedRootPaths.find(rootPath => basePath.startsWith(rootPath))
     },

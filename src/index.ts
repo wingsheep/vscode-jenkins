@@ -7,65 +7,70 @@ export function activate(context: vscode.ExtensionContext) {
   const statusBarItem = window.createStatusBarItem(StatusBarAlignment.Left, 0)
   const outputChannel = vscode.window.createOutputChannel('Jenkins Build')
   let isBuildRunning = false
+  let isBuildNumber = 0
   statusBarItem.text = '$(zap) Jenkins Build'
   statusBarItem.command = 'jenkins.buildJob'
   statusBarItem.tooltip = `Jenkins Build <${Config.get().jobName}>`
   statusBarItem.show()
   async function handleRequireParams() {
     const { passwordKey, userName, domain, jobName } = Config.get()
-    const requiredParams = []
     if (!userName) {
       const inputUserName = await vscode.window.showInputBox({
-        prompt: 'Please input jenkins user name：',
+        prompt: 'Please input jenkins user name',
       })
-      if (inputUserName)
+      if (inputUserName) {
         Config.update('userName', inputUserName)
-      else
-        requiredParams.push('userName')
+      }
+      else {
+        window.showErrorMessage('Please input jenkins user name')
+        return false
+      }
     }
     if (!passwordKey) {
       const inputPasswordKey = await vscode.window.showInputBox({
-        prompt: 'Please input jenkins password key in system variables：',
+        prompt: 'Please input jenkins password key in system variables',
       })
-      if (inputPasswordKey)
+      if (inputPasswordKey) {
         Config.update('passwordKey', inputPasswordKey)
-      else
-        requiredParams.push('passwordKey')
+      }
+      else {
+        window.showErrorMessage('Please input jenkins password key in system variables')
+        return false
+      }
     }
     if (!domain) {
       const inputDomain = await vscode.window.showInputBox({
-        prompt: 'Please input jenkins domain：',
+        prompt: 'Please input jenkins domain',
       })
-      if (inputDomain)
+      if (inputDomain) {
         Config.update('domain', inputDomain)
-      else
-        requiredParams.push('domain')
+      }
+      else {
+        window.showErrorMessage('Please input jenkins domain')
+        return false
+      }
     }
     if (!jobName) {
       const inputJobName = await vscode.window.showInputBox({
-        prompt: 'Please input jenkins job name：',
+        prompt: 'Please input jenkins job name',
       })
-      if (inputJobName)
+      if (inputJobName) {
         Config.update('jobName', inputJobName)
-      else
-        requiredParams.push('jobName')
+      }
+      else {
+        window.showErrorMessage('Please input jenkins job name')
+        return false
+      }
     }
-    if (requiredParams.length) {
-      const message = `The following parameters are required: ${requiredParams.join(', ')}`
-      return window.showErrorMessage(message)
-    }
-    if (requiredParams.length) {
-      const message = `The following parameters are required: ${requiredParams.join(', ')}`
-      return window.showErrorMessage(message)
-    }
-    return requiredParams.length
+    return true
   }
 
   const buildJob = vscode.commands.registerCommand('jenkins.buildJob', async () => {
+    const flag = await handleRequireParams()
+    if (!flag)
+      return
     if (isBuildRunning)
       return window.showWarningMessage('Wait for the previous build to end')
-    if (await handleRequireParams())
-      return false
     const { params, jobName, isBuildCurrentBranch } = Config.get()
     if (isBuildCurrentBranch) {
       const rootPath = Utils.folder.getRootPath() || '/'
@@ -96,6 +101,7 @@ export function activate(context: vscode.ExtensionContext) {
         const { lastBuild: { number, url } } = await Utils.jenkins.getJobDetail() as any
         outputChannel.appendLine(`Building Number: ${number}`)
         outputChannel.appendLine(`Building url: ${url}`)
+        isBuildNumber = number
         logSteram(number)
       }, 1000)
     })
@@ -120,38 +126,80 @@ export function activate(context: vscode.ExtensionContext) {
         outputChannel.appendLine('Build End!!!')
         statusBarItem.text = '$(zap) Jenkins Build'
         isBuildRunning = false
-        window.showInformationMessage('Build end !!! 🎉')
+        isBuildNumber = 0
+        window.showInformationMessage('Build end !!! ')
       })
     }
   })
 
   const killJob = vscode.commands.registerCommand('jenkins.killJob', async () => {
-    if (await handleRequireParams())
-      return false
-    const { lastBuild: { number }, isBuilding } = await Utils.jenkins.getJobDetail() as any
-    if (isBuilding) {
-      await Utils.jenkins.stopBuild(number)
+    const flag = await handleRequireParams()
+    if (!flag)
+      return
+    if (isBuildRunning) {
+      await Utils.jenkins.stopBuild(isBuildNumber)
+      window.showInformationMessage(`#${isBuildNumber} is stopped`)
       isBuildRunning = false
+      isBuildNumber = 0
       statusBarItem.text = '$(zap) Jenkins Build'
-      window.showInformationMessage('The last build is stopped')
     }
     else {
-      window.showWarningMessage('The last build is not running')
+      window.showWarningMessage(`Jenkins Build is not running`)
     }
   })
 
   const generateSetting = vscode.commands.registerCommand('jenkins.generateSetting', async () => {
-    if (await handleRequireParams())
-      return false
-    const inputJobName = await vscode.window.showInputBox({
-      prompt: 'Please confirm jenkins job name：',
-      value: Config.get().jobName,
+    const { passwordKey, userName, domain, jobName, isBuildCurrentBranch, params } = Config.get()
+    Config.update('passwordKey', passwordKey)
+    Config.update('userName', userName)
+    Config.update('domain', domain)
+    Config.update('jobName', jobName)
+    Config.update('jobName', jobName)
+    Config.update('isBuildCurrentBranch', isBuildCurrentBranch)
+    Config.update('params', params)
+    const inputUserName = await vscode.window.showInputBox({
+      prompt: 'Please confirm jenkins username',
+      value: userName,
     })
-    if (inputJobName)
-      Config.update('jobName', inputJobName)
-    const { actions } = await Utils.jenkins.getJobDetail() as any
-    const params = Utils.jenkins.handleParametersDefinitionProperty(actions)
-    await Config.update('params', params)
+    inputUserName && Config.update('userName', inputUserName)
+
+    const inputPasswordKey = await vscode.window.showInputBox({
+      prompt: 'Please confirm jenkins password key',
+      value: passwordKey,
+    })
+    inputPasswordKey && Config.update('passwordKey', inputPasswordKey)
+
+    const inputDomain = await vscode.window.showInputBox({
+      prompt: 'Please confirm jenkins domain',
+      value: domain,
+    })
+    inputDomain && Config.update('domain', inputDomain)
+
+    const inputJobName = await vscode.window.showInputBox({
+      prompt: 'Please confirm jenkins job name',
+      value: jobName,
+    })
+    inputJobName && Config.update('jobName', inputJobName)
+
+    const newConfig = Config.get()
+    if (newConfig.userName && newConfig.passwordKey && newConfig.domain && newConfig.jobName) {
+      const { actions } = await Utils.jenkins.getJobDetail() as any
+      const jobParams = Utils.jenkins.handleParametersDefinitionProperty(actions)
+      await Config.update('params', jobParams)
+      if (Object.prototype.hasOwnProperty.call(jobParams, 'build_branch') && newConfig.isBuildCurrentBranch) {
+        const rootPath = Utils.folder.getRootPath() || '/'
+        const git = Utils.repo.get(rootPath)
+        const branch = await Utils.repo.getBranch(git)
+        Config.update('params', {
+          ...params,
+          build_branch: branch.current,
+        })
+      }
+      vscode.window.showInformationMessage('Generate setting success')
+    }
+    else {
+      window.showErrorMessage('Please check the required configuration items.')
+    }
     await Config.open()
   })
   context.subscriptions.push(buildJob)

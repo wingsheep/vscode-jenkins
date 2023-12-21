@@ -1,17 +1,17 @@
 # Open in GitHub
 
 <p align="center">
-  <img src="https://wingsheep.gallerycdn.vsassets.io/extensions/wingsheep/jenkins-build/0.0.1/1703070712751/Microsoft.VisualStudio.Services.Icons.Default" width="128" alt="Logo">
+  <img src="https://wingsheep.gallerycdn.vsassets.io/extensions/wingsheep/easy-build-jenkins/0.0.2/1703142794203/Microsoft.VisualStudio.Services.Icons.Default" width="128" alt="Logo">
 </p>
 
 Generate Jenkins configuration based on the current project and deploy with one click.
 
 ## Install
 
-Follow the instructions in the [Marketplace](https://marketplace.visualstudio.com/items?itemName=wingsheep.jenkins-build), or run the following in the command palette:
+Follow the instructions in the [Marketplace](https://marketplace.visualstudio.com/items?itemName=wingsheep.easy-jenkins-build), or run the following in the command palette:
 
 ```shell
-ext install wingsheep.jenkins-build
+ext install wingsheep.easy-jenkins-build
 ```
 
 ## Usage

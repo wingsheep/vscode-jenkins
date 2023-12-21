@@ -120,15 +120,19 @@ export class JenkinsAPI {
     const resp = await this.request(api, {
       method: 'POST',
     })
-    return (await resp.json())
+    return (await resp.text())
   }
 
   public async stopBuild(jobName: string, buildNumber: number) {
     const api = `${this.jenkins.url}/job/${jobName}/${buildNumber}/stop`
+    const data = new URLSearchParams()
+    const params: any = { number: buildNumber }
+    Object.keys(params).forEach(key => data.append(key, params[key]))
     const resp = await this.request(api, {
       method: 'POST',
+      body: data,
     })
-    return (await resp.json())
+    return (await resp.text())
   }
 
   async getCrumbData() {

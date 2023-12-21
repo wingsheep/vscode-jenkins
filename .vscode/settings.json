@@ -41,5 +41,8 @@
   "cSpell.words": [
     "pify",
     "repopath"
-  ]
+  ],
+  "jenkins.params": {
+    "build_branch": "main"
+  }
 }

@@ -84,17 +84,14 @@
     ]
   },
   "scripts": {
-    "build": "tsup src/index.ts --external vscode",
-    "dev": "nr build --watch",
     "lint": "eslint .",
     "publish": "vsce publish",
     "pack": "vsce package",
-    "test": "vitest",
     "typecheck": "tsc --noEmit",
     "release": "bumpp && nr publish",
     "vscode:prepublish": "pnpm run package",
     "compile": "webpack",
-    "watch": "webpack --watch",
+    "dev": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map"
   },
   "dependencies": {
@@ -113,14 +110,10 @@
     "@vscode/vsce": "^2.22.0",
     "bumpp": "^9.2.0",
     "eslint": "^8.53.0",
-    "esno": "^4.0.0",
     "pnpm": "^8.10.5",
     "rimraf": "^5.0.5",
     "ts-loader": "^9.5.1",
-    "tsup": "^7.2.0",
     "typescript": "^5.2.2",
-    "vite": "^4.5.0",
-    "vitest": "^0.34.6",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   }
