@@ -4,68 +4,66 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
+dependencies:
+  absolute:
+    specifier: ^0.0.1
+    version: registry.npmmirror.com/absolute@0.0.1
+  node-fetch:
+    specifier: ^2
+    version: registry.npmmirror.com/node-fetch@2.7.0
+  simple-git:
+    specifier: ^3.21.0
+    version: registry.npmmirror.com/simple-git@3.21.0
 
-  .:
-    dependencies:
-      absolute:
-        specifier: ^0.0.1
-        version: registry.npmmirror.com/absolute@0.0.1
-      node-fetch:
-        specifier: ^2
-        version: registry.npmmirror.com/node-fetch@2.7.0
-      simple-git:
-        specifier: ^3.21.0
-        version: registry.npmmirror.com/simple-git@3.21.0
-    devDependencies:
-      '@antfu/eslint-config':
-        specifier: ^1.1.1
-        version: registry.npmmirror.com/@antfu/eslint-config@1.2.1(eslint@8.56.0)(typescript@5.3.3)
-      '@antfu/ni':
-        specifier: ^0.21.9
-        version: registry.npmmirror.com/@antfu/ni@0.21.12
-      '@types/absolute':
-        specifier: ^0.0.31
-        version: registry.npmmirror.com/@types/absolute@0.0.31
-      '@types/jenkins':
-        specifier: ^1.0.2
-        version: registry.npmmirror.com/@types/jenkins@1.0.2
-      '@types/node':
-        specifier: ^20.9.0
-        version: registry.npmmirror.com/@types/node@20.10.5
-      '@types/node-fetch':
-        specifier: ^2.6.9
-        version: registry.npmmirror.com/@types/node-fetch@2.6.9
-      '@types/vscode':
-        specifier: ^1.83.1
-        version: registry.npmmirror.com/@types/vscode@1.85.0
-      '@vscode/vsce':
-        specifier: ^2.22.0
-        version: registry.npmmirror.com/@vscode/vsce@2.22.0
-      bumpp:
-        specifier: ^9.2.0
-        version: registry.npmmirror.com/bumpp@9.2.1
-      eslint:
-        specifier: ^8.53.0
-        version: registry.npmmirror.com/eslint@8.56.0
-      pnpm:
-        specifier: ^8.10.5
-        version: registry.npmmirror.com/pnpm@8.12.1
-      rimraf:
-        specifier: ^5.0.5
-        version: registry.npmmirror.com/rimraf@5.0.5
-      ts-loader:
-        specifier: ^9.5.1
-        version: registry.npmmirror.com/ts-loader@9.5.1(typescript@5.3.3)(webpack@5.89.0)
-      typescript:
-        specifier: ^5.2.2
-        version: registry.npmmirror.com/typescript@5.3.3
-      webpack:
-        specifier: ^5.89.0
-        version: registry.npmmirror.com/webpack@5.89.0(webpack-cli@5.1.4)
-      webpack-cli:
-        specifier: ^5.1.4
-        version: registry.npmmirror.com/webpack-cli@5.1.4(webpack@5.89.0)
+devDependencies:
+  '@antfu/eslint-config':
+    specifier: ^1.1.1
+    version: registry.npmmirror.com/@antfu/eslint-config@1.2.1(eslint@8.56.0)(typescript@5.3.3)
+  '@antfu/ni':
+    specifier: ^0.21.9
+    version: registry.npmmirror.com/@antfu/ni@0.21.12
+  '@types/absolute':
+    specifier: ^0.0.31
+    version: registry.npmmirror.com/@types/absolute@0.0.31
+  '@types/jenkins':
+    specifier: ^1.0.2
+    version: registry.npmmirror.com/@types/jenkins@1.0.2
+  '@types/node':
+    specifier: ^20.9.0
+    version: registry.npmmirror.com/@types/node@20.10.5
+  '@types/node-fetch':
+    specifier: ^2.6.9
+    version: registry.npmmirror.com/@types/node-fetch@2.6.9
+  '@types/vscode':
+    specifier: ^1.83.1
+    version: registry.npmmirror.com/@types/vscode@1.85.0
+  '@vscode/vsce':
+    specifier: ^2.22.0
+    version: registry.npmmirror.com/@vscode/vsce@2.22.0
+  bumpp:
+    specifier: ^9.2.0
+    version: registry.npmmirror.com/bumpp@9.2.1
+  eslint:
+    specifier: ^8.53.0
+    version: registry.npmmirror.com/eslint@8.56.0
+  pnpm:
+    specifier: ^8.10.5
+    version: registry.npmmirror.com/pnpm@8.12.1
+  rimraf:
+    specifier: ^5.0.5
+    version: registry.npmmirror.com/rimraf@5.0.5
+  ts-loader:
+    specifier: ^9.5.1
+    version: registry.npmmirror.com/ts-loader@9.5.1(typescript@5.3.3)(webpack@5.89.0)
+  typescript:
+    specifier: ^5.2.2
+    version: registry.npmmirror.com/typescript@5.3.3
+  webpack:
+    specifier: ^5.89.0
+    version: registry.npmmirror.com/webpack@5.89.0(webpack-cli@5.1.4)
+  webpack-cli:
+    specifier: ^5.1.4
+    version: registry.npmmirror.com/webpack-cli@5.1.4(webpack@5.89.0)
 
 packages:
 
@@ -100,7 +98,7 @@ packages:
       eslint-plugin-jsdoc: registry.npmmirror.com/eslint-plugin-jsdoc@46.9.1(eslint@8.56.0)
       eslint-plugin-jsonc: registry.npmmirror.com/eslint-plugin-jsonc@2.11.2(eslint@8.56.0)
       eslint-plugin-markdown: registry.npmmirror.com/eslint-plugin-markdown@3.0.1(eslint@8.56.0)
-      eslint-plugin-n: registry.npmmirror.com/eslint-plugin-n@16.4.0(eslint@8.56.0)
+      eslint-plugin-n: registry.npmmirror.com/eslint-plugin-n@16.5.0(eslint@8.56.0)
       eslint-plugin-no-only-tests: registry.npmmirror.com/eslint-plugin-no-only-tests@3.1.0
       eslint-plugin-perfectionist: registry.npmmirror.com/eslint-plugin-perfectionist@2.5.0(eslint@8.56.0)(typescript@5.3.3)(vue-eslint-parser@9.3.2)
       eslint-plugin-unicorn: registry.npmmirror.com/eslint-plugin-unicorn@49.0.0(eslint@8.56.0)
@@ -2001,11 +1999,11 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmmirror.com/eslint-plugin-n@16.4.0(eslint@8.56.0):
-    resolution: {integrity: sha512-IkqJjGoWYGskVaJA7WQuN8PINIxc0N/Pk/jLeYT4ees6Fo5lAhpwGsYek6gS9tCUxgDC4zJ+OwY2bY/6/9OMKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-n/-/eslint-plugin-n-16.4.0.tgz}
-    id: registry.npmmirror.com/eslint-plugin-n/16.4.0
+  registry.npmmirror.com/eslint-plugin-n@16.5.0(eslint@8.56.0):
+    resolution: {integrity: sha512-Hw02Bj1QrZIlKyj471Tb1jSReTl4ghIMHGuBGiMVmw+s0jOPbI4CBuYpGbZr+tdQ+VAvSK6FDSta3J4ib/SKHQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-n/-/eslint-plugin-n-16.5.0.tgz}
+    id: registry.npmmirror.com/eslint-plugin-n/16.5.0
     name: eslint-plugin-n
-    version: 16.4.0
+    version: 16.5.0
     engines: {node: '>=16.0.0'}
     peerDependencies:
       eslint: '>=7.0.0'
@@ -4075,7 +4073,6 @@ packages:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/safe-buffer/-/safe-buffer-5.2.1.tgz}
     name: safe-buffer
     version: 5.2.1
-    requiresBuild: true
     dev: true
 
   registry.npmmirror.com/sax@1.3.0:
